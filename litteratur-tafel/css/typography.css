@@ -1,0 +1,85 @@
+/*Standard-CSS zur Darstellung der Litteratur-Tafel im Oxygen*/
+
+
+teiHeader {
+    display:none;
+}
+
+text {
+    display:none;
+}
+
+surfaceGrp:first-child {
+    display:block;
+}
+
+surfaceGrp {
+    display:none;
+}
+
+surface {
+    display:block;
+}
+
+zone {
+    display:block;
+    border: 1px solid black;
+    padding:1em;
+    margin-bottom:1em;
+}
+    
+
+zone:after {
+    display:block;
+    /*dauert zu lange*/
+    /*
+    content:oxy_url(oxy_concat('http://80.108.116.53:9999/01/02/flaischlen.png/',attr(ulx),','attr(uly),',',oxy_subtract(attr(lrx), attr(ulx), "integer"),',',oxy_subtract(attr(lry), attr(uly), "integer"),'/full/0/default.png'));
+    */
+    content:"Im Browser ansehen";
+    link:oxy_concat('http://80.108.116.53:9999/01/02/flaischlen.png/',attr(ulx),','attr(uly),',',oxy_subtract(attr(lrx), attr(ulx), "integer"),',',oxy_subtract(attr(lry), attr(uly), "integer"),'/full/0/default.png');
+    font-size:smaller;
+    margin-bottom:1em;    
+}
+
+line {
+    font-family:monospace;
+    display:block;
+    font-size:26px;
+    margin-bottom:1em;
+}
+
+
+line:before {
+  content:oxy_label(text, "Vorschau: ", styles, "font-size:12px;color:gray;");
+  
+}
+
+seg:before {
+    display:inline;
+    padding-right:1em;
+    content:oxy_label(text, oxy_xpath("./text()"), styles, attr(style));
+}
+
+seg:after {
+    
+    display:block;
+    font-size:12px;
+    content:
+        oxy_checkbox(        
+        edit, "@style",
+        values, "font-family:serif, font-family:fantasy, font-style:italic, font-weight:bold, text-decoration:underline, text-decoration-style:double",
+        uncheckedValues, ",,,,,,",
+        resultSeparator, ";"
+        labels, "Serifenschrift, fantasy, kursiv, fett, unterstrichen, doppelt")
+        
+        oxy_button(actionID, 'font-size', showIcon, true)
+        oxy_button(actionID, 'text-decoration-color', showIcon, true)
+        oxy_button(actionID, 'text-shadow', showIcon, true)
+        
+        oxy_textfield(
+            edit, "@style");
+}
+
+
+
+

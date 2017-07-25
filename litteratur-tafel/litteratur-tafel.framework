@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialized version="16.1" xml:space="preserve">
+	<serializableOrderedMap>
+		<entry>
+			<String>document.types</String>
+			<documentTypeDescriptor-array>
+				<documentTypeDescriptor>
+					<field name="extensionPatch">
+						<null/>
+					</field>
+					<field name="name">
+						<String>litteratur-tafel</String>
+					</field>
+					<field name="schemaDescriptor">
+						<null/>
+					</field>
+					<field name="classpath">
+						<String-array/>
+					</field>
+					<field name="parentClassLoaderID">
+						<null/>
+					</field>
+					<field name="authorExtensionDescriptor">
+						<authorExtension>
+							<field name="cssDescriptors">
+								<cssFile-array>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/standard.css</String>
+										</field>
+										<field name="title">
+											<String>Standard</String>
+										</field>
+										<field name="alternate">
+											<Boolean>true</Boolean>
+										</field>
+									</cssFile>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/typography.css</String>
+										</field>
+										<field name="title">
+											<String>Typographie</String>
+										</field>
+										<field name="alternate">
+											<Boolean>true</Boolean>
+										</field>
+									</cssFile>
+								</cssFile-array>
+							</field>
+							<field name="mergeCSSsFromDocument">
+								<Boolean>true</Boolean>
+							</field>
+							<field name="actionDescriptors">
+								<action-array>
+									<action>
+										<field name="id">
+											<String>seg</String>
+										</field>
+										<field name="name">
+											<String>seg</String>
+										</field>
+										<field name="description">
+											<String>seg hinzufügen</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>./name()="line"</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;seg xmlns="http://www.tei-c.org/ns/1.0" style="">&lt;/seg></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>font-size</String>
+										</field>
+										<field name="name">
+											<String>font-size</String>
+										</field>
+										<field name="description">
+											<String>Schriftgröße festlegen</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>./name()='seg'</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>script</String>
+																<String>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:jop="java:javax.swing.JOptionPane"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    &lt;xsl:output omit-xml-declaration="yes"/>
+    &lt;xsl:template xmlns="http://www.tei-c.org/ns/1.0" match="//tei:seg">
+        &lt;xsl:element name="seg">
+          &lt;xsl:variable name="font-size" select="jop:showInputDialog(null, 'font-size', '')"/>  
+          &lt;xsl:copy-of select="@*[name()!='style']"/>
+            &lt;xsl:attribute name="style">
+                &lt;xsl:choose>
+                    &lt;xsl:when test="contains(@style,'font-size')">
+                        &lt;xsl:value-of select="replace(@style,'font-size:[1-9]*?pt',concat('font-size:',$font-size,'pt'))">&lt;/xsl:value-of>
+                    &lt;/xsl:when>
+                    &lt;xsl:otherwise>
+                        &lt;xsl:value-of select="concat(@style,';font-size:',$font-size,'pt;')"/>
+                    &lt;/xsl:otherwise>
+                &lt;/xsl:choose>
+                
+               
+            &lt;/xsl:attribute>
+            &lt;xsl:copy-of select=".//node()"/>
+        &lt;/xsl:element>
+    &lt;/xsl:template>
+&lt;/xsl:stylesheet></String>
+															</entry>
+															<entry>
+																<String>sourceLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>targetLocation</String>
+																<String>.</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.XSLTOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>text-decoration-color</String>
+										</field>
+										<field name="name">
+											<String>text-decoration-color</String>
+										</field>
+										<field name="description">
+											<String>Unterstreichungsfarbe festlegen</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>./name()='seg'</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>script</String>
+																<String>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:jop="java:javax.swing.JOptionPane"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    &lt;xsl:output omit-xml-declaration="yes"/>
+    &lt;xsl:template xmlns="http://www.tei-c.org/ns/1.0" match="//tei:seg">
+         &lt;xsl:variable name="color" select="jop:showInputDialog(null, 'color', '')"/>
+        &lt;xsl:element name="seg">
+            &lt;xsl:copy-of select="@*[name()!='style']"/>
+            &lt;xsl:attribute name="style">
+                &lt;xsl:choose>
+                    &lt;xsl:when test="contains(@style,'text-decoration-color')">
+                        &lt;xsl:value-of select="replace(@style,'text-decoration-color:[a-z]*;',concat('text-decoration-color:',$color,';'))"/>
+                    &lt;/xsl:when>
+                    &lt;xsl:otherwise>
+                        &lt;xsl:value-of select="concat(@style,'text-decoration-color:',$color,';')"/>
+                    &lt;/xsl:otherwise>
+                &lt;/xsl:choose>
+                
+               
+            &lt;/xsl:attribute>
+            &lt;xsl:copy-of select=".//node()"/>
+        &lt;/xsl:element>
+    &lt;/xsl:template>
+&lt;/xsl:stylesheet></String>
+															</entry>
+															<entry>
+																<String>sourceLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>targetLocation</String>
+																<String>.</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.XSLTOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>text-shadow</String>
+										</field>
+										<field name="name">
+											<String>text-shadow</String>
+										</field>
+										<field name="description">
+											<String>Schlagschatten</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>./name()='seg'</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>script</String>
+																<String>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    &lt;xsl:output omit-xml-declaration="yes"/>
+    &lt;xsl:template xmlns="http://www.tei-c.org/ns/1.0" match="//tei:seg">
+        &lt;xsl:element name="seg">
+            &lt;xsl:variable name="schattencode">
+                &lt;xsl:text>text-shadow:1px 1px 0px white, 2px 2px 0px black;&lt;/xsl:text>
+            &lt;/xsl:variable>
+            &lt;xsl:copy-of select="@*[name()!='style']"/>
+            &lt;xsl:attribute name="style">
+                &lt;xsl:choose>
+                    &lt;xsl:when test="contains(@style,'text-shadow')">
+                        &lt;xsl:value-of select="replace(@style,'text-shadow:.*;',$schattencode)"/>
+                    &lt;/xsl:when>
+                    &lt;xsl:otherwise>
+                        &lt;xsl:value-of select="concat(@style,$schattencode)"/>
+                    &lt;/xsl:otherwise>
+                &lt;/xsl:choose>
+                
+               
+            &lt;/xsl:attribute>
+            &lt;xsl:copy-of select=".//node()"/>
+        &lt;/xsl:element>
+    &lt;/xsl:template>
+&lt;/xsl:stylesheet></String>
+															</entry>
+															<entry>
+																<String>sourceLocation</String>
+																<String>.</String>
+															</entry>
+															<entry>
+																<String>targetLocation</String>
+																<String>.</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.XSLTOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+								</action-array>
+							</field>
+							<field name="menubarDescriptor">
+								<menu>
+									<field name="label">
+										<String>Menü</String>
+									</field>
+									<field name="accessKey">
+										<null/>
+									</field>
+									<field name="iconPath">
+										<null/>
+									</field>
+									<field name="menuEntriesDescriptorList">
+										<menuEntry-array/>
+									</field>
+								</menu>
+							</field>
+							<field name="popupMenuDescriptor">
+								<menu>
+									<field name="label">
+										<String>Kontextmenü</String>
+									</field>
+									<field name="accessKey">
+										<null/>
+									</field>
+									<field name="iconPath">
+										<null/>
+									</field>
+									<field name="menuEntriesDescriptorList">
+										<menuEntry-array/>
+									</field>
+								</menu>
+							</field>
+							<field name="toolbarDescriptor">
+								<toolbar>
+									<field name="id">
+										<String>Typography</String>
+									</field>
+									<field name="type">
+										<Integer>2</Integer>
+									</field>
+									<field name="largeIconPath">
+										<null/>
+									</field>
+									<field name="smallIconPath">
+										<null/>
+									</field>
+									<field name="toolbarEntriesDescriptorList">
+										<toolbarEntry-array>
+											<toolbarItem>
+												<field name="actionID">
+													<String>seg</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>font-size</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>text-decoration-color</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>text-shadow</String>
+												</field>
+											</toolbarItem>
+										</toolbarEntry-array>
+									</field>
+								</toolbar>
+							</field>
+							<field name="additionalToolbarsDescriptors">
+								<null/>
+							</field>
+							<field name="contextualItems">
+								<contextProvider>
+									<field name="items">
+										<contextItem-array/>
+									</field>
+									<field name="removeItems">
+										<null/>
+									</field>
+								</contextProvider>
+							</field>
+							<field name="tableSupportClassName">
+								<null/>
+							</field>
+							<field name="tableColWidthSupportClassName">
+								<null/>
+							</field>
+							<field name="customReferencesResolver">
+								<null/>
+							</field>
+							<field name="authorExtensionStateListener">
+								<null/>
+							</field>
+							<field name="attributesRecognizer">
+								<null/>
+							</field>
+						</authorExtension>
+					</field>
+					<field name="templatesLocations">
+						<String-array/>
+					</field>
+					<field name="xmlCatalogs">
+						<String-array/>
+					</field>
+					<field name="description">
+						<String>Cäsar Flaischlens "Graphische Litteratur-Tafel"</String>
+					</field>
+					<field name="doctypeRules">
+						<documentTypeRule-array>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>*</String>
+								</field>
+								<field name="rootElem">
+									<String>*</String>
+								</field>
+								<field name="fileName">
+									<String>Litteratur-Tafel.xml</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String></String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
+						</documentTypeRule-array>
+					</field>
+					<field name="scenarios">
+						<scenario-array/>
+					</field>
+					<field name="validationScenarios">
+						<validationScenario-array/>
+					</field>
+					<field name="defaultValidationScenarios">
+						<null/>
+					</field>
+					<field name="defaultTransformationScenarios">
+						<null/>
+					</field>
+					<field name="extensionsBundleClassName">
+						<null/>
+					</field>
+					<field name="useImposedInitialPage">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="imposedInitialPage">
+						<String>Author</String>
+					</field>
+					<field name="elementLocatorExtension">
+						<null/>
+					</field>
+					<field name="schemaManagerFilterExtension">
+						<null/>
+					</field>
+					<field name="authorSWTDndExtension">
+						<null/>
+					</field>
+					<field name="textSWTDndExtension">
+						<null/>
+					</field>
+					<field name="authorSwingDndExtension">
+						<null/>
+					</field>
+					<field name="cssStylesFilterExtension">
+						<null/>
+					</field>
+					<field name="attributesValueEditor">
+						<null/>
+					</field>
+					<field name="priority">
+						<Integer>3</Integer>
+					</field>
+					<field name="xmlNodeCustomizerExtension">
+						<null/>
+					</field>
+					<field name="externalObjectInsertionHandler">
+						<null/>
+					</field>
+					<field name="customAttributeValueEditor">
+						<null/>
+					</field>
+				</documentTypeDescriptor>
+			</documentTypeDescriptor-array>
+		</entry>
+	</serializableOrderedMap>
+</serialized>
